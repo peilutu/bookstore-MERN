@@ -19,19 +19,17 @@ const EditBook = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5555/books/${id}`)
+      .get(`${import.meta.env.VITE_BASE_URL}/books/${id}`)
       .then((res) => {
         setAuthor(res.data.author);
         setTitle(res.data.title);
         setPublishYear(res.data.publishYear);
         setLoading(false);
-        enqueueSnackbar("Book Edited successfully", { variant: "success" });
-        navigate("/");
       })
       .catch((error) => {
         alert("Error happened");
         console.log(error.message);
-        enqueueSnackbar("Error", { variant: "error " });
+
         setLoading(true);
       });
   }, []);
@@ -48,10 +46,12 @@ const EditBook = () => {
       .patch(`http://localhost:5555/books/${id}`, data)
       .then(() => {
         setLoading(false);
+        enqueueSnackbar("Book Edited successfully", { variant: "success" });
         navigate("/");
       })
       .catch((error) => {
-        alert("Error happened. ");
+        // alert("Error happened. ");
+        enqueueSnackbar("Error", { variant: "error " });
         console.log(error.message);
       });
   };

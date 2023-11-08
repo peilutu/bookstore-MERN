@@ -7,16 +7,7 @@ import dotenv from "dotenv";
 dotenv.config();
 const app = express();
 app.use(express.json());
-//opt1:
 app.use(cors());
-//opt2:
-// app.use(
-//   cors({
-//     origin: "http://localhost:3000",
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     allowedHeaders: ["Content-Tpye"],
-//   })
-// );
 
 app.get("/", (req, res) => {
   console.log(req);
